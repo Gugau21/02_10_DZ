@@ -12,6 +12,11 @@ class Command(BaseCommand):
         parser.add_argument("--number", type=int, default=100)
 
     def handle(self, *args, **options):
+        number = options["number"]
+        if number < 1:
+            self.stdout.write(
+                self.style.ERROR("Number is less then 1")
+            )
         for i in range (options["number"]):
             t = Teacher.objects.create(
                 first_name=fake.first_name(),
